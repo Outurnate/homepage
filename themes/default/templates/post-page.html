@@ -5,12 +5,8 @@
 {% endblock %}
 
 {% block content %}
-<p>
-  <div class="title_postpage">{{ page.title }}</div>
-</p>
-<p>
-  <div class="date_postpage">{{ page.date }}</div>
-</p>
+<div class="title_postpage">{{ page.title }}</div>
+<div class="date_postpage">{{ page.date }}</div>
 
 <article>
   {{ page.content | safe }}
