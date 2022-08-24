@@ -1,0 +1,18 @@
+{% extends "index.html" %}
+
+{% block title %}
+{{ page.title }} | {{ config.title }}
+{% endblock %}
+
+{% block content %}
+<p>
+  <div class="title_postpage">{{ page.title }}</div>
+</p>
+<p>
+  <div class="date_postpage">{{ page.date }}</div>
+</p>
+
+<article>
+  {{ page.content | safe }}
+</article>
+{% endblock content %}

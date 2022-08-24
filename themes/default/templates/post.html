@@ -1,0 +1,12 @@
+{% extends "index.html" %}
+
+{% block content %}
+  {% for post in section.pages %}
+    <p>
+      <div class="date">{{ post.date | date(format="%Y-%m-%d") }}</div>
+      <div class="title">
+        <a href="{{ post.permalink }}">{{ post.title }}</a>
+      </div>
+    </p>
+  {% endfor %}
+{% endblock content %}
