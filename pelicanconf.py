@@ -1,6 +1,7 @@
 AUTHOR = 'Joe Dillon'
 SITENAME = 'Joe Dillon'
-SITEURL = ''
+SITEURL = 'https://outurnate.com'
+RELATIVE_URLS = False
 
 PLUGINS = ['minify', 'webassets']
 
