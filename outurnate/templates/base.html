@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover" />
+    <title>{% block title %}{{ SITENAME }}{% endblock %}</title>
+    {% assets filters="libsass,cssmin", output="css/style.min.css", "css/main.scss" %}
+      <link rel="stylesheet" href="{{ SITEURL }}/{{ ASSET_URL }}">
+    {% endassets %}
+    <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} ATOM Feed" />
+    {% if FEED_RSS %}
+      <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
+    {% endif %}
+  </head>
+  <body>
+    <script type="module" src="{{SITEURL}}/theme/js/model-viewer.min.js" async></script>
+    <header>
+      <div class="site_title">
+        <p><a href="/"><img src="{{ SITEURL }}/theme/images/avatar.png" alt="{{ SITENAME }}" width="128" height="auto" class="srko" /></a></p>
+        <p><a href="/">&nbsp;{{ SITENAME }}</a></p>
+      </div>
+      <nav>
+        <a href="/archives.html">&gt;archives</a>
+        &nbsp;<a href="/pages/web-things.html">&gt;web things</a>
+        &nbsp;<a href="https://github.com/outurnate">&gt;github</a>
+      </nav>
+    </header>
+    <section>
+      {% block content %}
+      {% endblock content %}
+    </section>
+    <footer>
+      <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+        <img alt="Creative Commons License" src="{{ SITEURL }}/theme/images/cc.png" />
+      </a>
+    </footer>
+  </body>
+</html>

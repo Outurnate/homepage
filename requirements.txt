@@ -1,0 +1,6 @@
+pelican[markdown]
+pelican-webassets
+pelican-minify
+cssmin
+libsass
+closure
