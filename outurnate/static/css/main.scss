@@ -1,4 +1,6 @@
 @import 'overpass';
+@import 'firecode';
+@import 'pygments';
 
 $pink:#e600ac;
 $purple:#7000a5;
@@ -10,6 +12,7 @@ $textcolor: #feffff;
 $lighttextcolor: #eeeeee;
 
 @include print-overpass-font-face;
+@include print-firacode-font-face;
 
 body {
   line-height: 1.5;
@@ -159,12 +162,12 @@ pre {
   border: 1px solid #AAA;
   overflow-x: auto;
   overflow-y: hidden;
-  padding: 20px;
+  padding: 10px;
+  font-size: 1.5vh;
 }
 
-:not(pre) > code {
-  background-color: $off-black;
-  color: $textcolor;
+code {
+  font-family: 'FiraCode-Regular';
 }
 
 blockquote {
