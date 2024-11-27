@@ -48,7 +48,7 @@ DEFAULT_PAGINATION = False
 THEME = 'outurnate'
 
 TYPOGRIFY = True
-TYPOGRIFY_IGNORE_TAGS = ["pre", "code", "svg"]
+TYPOGRIFY_IGNORE_TAGS = ["pre", "code", "svg", "title"]
 
 MARKDOWN = {
   'extension_configs': {
