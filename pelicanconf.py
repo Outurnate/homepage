@@ -1,3 +1,8 @@
+import sys
+sys.path.append('.')
+
+import d2extension
+
 AUTHOR = 'Joe Dillon'
 SITENAME = 'Joe Dillon'
 SITEURL = 'https://outurnate.com'
@@ -7,16 +12,25 @@ PLUGINS = ['minify', 'webassets']
 
 PATH = 'content'
 PAGE_PATHS = ['pages']
-STATIC_PATHS = ['pages']
+STATIC_PATHS = ['pages', 'static']
 ARTICLE_PATHS = ['articles']
 IGNORE_FILES = ['.#*', '*.scss']
+EXTRA_PATH_METADATA = {
+    "static/apple-touch-icon.png": {"path": "apple-touch-icon.png"},
+    "static/favicon-64x.png": {"path": "favicon-64x.png"},
+    "static/favicon.ico": {"path": "favicon.ico"},
+    "static/favicon.svg": {"path": "favicon.svg"},
+    "static/site.webmanifest": {"path": "site.webmanifest"},
+    "static/web-app-manifest-192x192.png": {"path": "web-app-manifest-192x192.png"},
+    "static/web-app-manifest-512x512.png": {"path": "web-app-manifest-512x512.png"}
+}
 
 TIMEZONE = 'America/Toronto'
 
 DEFAULT_LANG = 'en'
 
 USE_FOLDER_AS_CATEGORY = True
-DELETE_OUTPUT_DIRECTORY = True
+DELETE_OUTPUT_DIRECTORY = False
 
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
 FEED_ALL_RSS = 'feeds/all.xml'
@@ -32,3 +46,18 @@ AUTHOR_SAVE_AS = ''
 DEFAULT_PAGINATION = False
 
 THEME = 'outurnate'
+
+TYPOGRIFY = True
+TYPOGRIFY_IGNORE_TAGS = ["pre", "code", "svg"]
+
+MARKDOWN = {
+  'extension_configs': {
+    'd2extension': {},
+    'markdown.extensions.codehilite': {
+      'css_class': 'highlight'
+    },
+    'markdown.extensions.extra': {},
+    'markdown.extensions.meta': {},
+  },
+  'output_format': 'html5',
+}

@@ -1,11 +1,11 @@
 @import 'overpass';
-@import 'firecode';
+@import 'firacode';
 @import 'pygments';
 
-$pink:#e600ac;
-$purple:#7000a5;
-$blue:#aaaaaa;
-$off-black:#06008c;
+$pink:#389844;
+$purple:#00420f;
+$blue:#6b946c;
+$off-black:#0c200d;
 
 $backgroundcolor: #000000;
 $textcolor: #feffff;
@@ -19,7 +19,7 @@ body {
   color: $textcolor;
   background-color: $backgroundcolor;
   font-family: overpass, sans-serif;
-  font-size: 2vh;
+  font-size: 1em;
   width: 80%;
   min-width: 200px;
   max-width: 720px;
@@ -27,7 +27,7 @@ body {
   padding-top: 40px;
   padding-bottom: 40px;
   
-  img, video {
+  img, video, figure {
     display: block;
     margin: 0 auto;
     max-width: 90%;
@@ -104,7 +104,6 @@ dl.archives {
 
 header.post {
   border-bottom: none;
-  ;
   a {
     font-size: 1.6em;
     line-height: 1.4em;
@@ -122,11 +121,19 @@ header.post {
 
 footer {
   color: $lighttextcolor;
-  text-align: right;
   margin-top: 50px;
   padding-top: 0px;
   a {
     color: $lighttextcolor;
+  }
+  svg {
+    display: block;
+    margin: auto;
+  }
+  small {
+    display: block;
+    text-align: center;
+    font-size: 0.6rem;
   }
 }
 
@@ -163,7 +170,7 @@ pre {
   overflow-x: auto;
   overflow-y: hidden;
   padding: 10px;
-  font-size: 1.5vh;
+  font-size: 1em;
 }
 
 code {
@@ -201,7 +208,8 @@ button {
 }
 
 img.srko {
-  border-radius: 50%;
+  border-radius: 5%;
+  image-rendering: pixelated;
 }
 
 model-viewer {

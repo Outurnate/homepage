@@ -4,3 +4,5 @@ pelican-minify
 cssmin
 libsass
 closure
+cssutils
+typogrify
