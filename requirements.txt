@@ -1,8 +1,8 @@
 pelican[markdown]
 pelican-webassets
 pelican-minify
+pelican-sitemap
 cssmin
 libsass
 closure
 cssutils
-typogrify

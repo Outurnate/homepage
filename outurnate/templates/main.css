@@ -1,52 +1,52 @@
-@font-face{
+@font-face {
   font-family: 'Fira Sans';
   src: local('Fira Sans Regular'),
-       url('theme/FiraSans-Regular.woff2') format('woff');
+       url('/theme/FiraSans-Regular.woff2') format('woff');
   font-weight: 400;
   font-style: normal;
   unicode-range: U+0020-007F,U+00A0-00FF,U+20BC,U+2010,U+2013,U+2014,U+2018,U+2019,U+201A,U+201C,U+201D,U+201E,U+2039,U+203A,U+2026,U+2022;
 }
 
-@font-face{
+@font-face {
   font-family: 'Fira Sans';
   src: local('Fira Sans Regular Italic'),
-       url('theme/FiraSans-Italic.woff2') format('woff');
+       url('/theme/FiraSans-Italic.woff2') format('woff');
   font-weight: 400;
   font-style: italic;
   unicode-range: U+0020-007F,U+00A0-00FF,U+20BC,U+2010,U+2013,U+2014,U+2018,U+2019,U+201A,U+201C,U+201D,U+201E,U+2039,U+203A,U+2026,U+2022;
 }
 
-@font-face{
+@font-face {
   font-family: 'Fira Sans';
   src: local('Fira Sans SemiBold'),
-       url('theme/FiraSans-SemiBold.woff2') format('woff');
+       url('/theme/FiraSans-SemiBold.woff2') format('woff');
   font-weight: 600;
   font-style: normal;
   unicode-range: U+0020-007F,U+00A0-00FF,U+20BC,U+2010,U+2013,U+2014,U+2018,U+2019,U+201A,U+201C,U+201D,U+201E,U+2039,U+203A,U+2026,U+2022;
 }
 
-@font-face{
+@font-face {
   font-family: 'Fira Sans';
   src: local('Fira Sans SemiBold Italic'),
-       url('theme/FiraSans-SemiBoldItalic.woff2') format('woff');
+       url('/theme/FiraSans-SemiBoldItalic.woff2') format('woff');
   font-weight: 600;
   font-style: italic;
   unicode-range: U+0020-007F,U+00A0-00FF,U+20BC,U+2010,U+2013,U+2014,U+2018,U+2019,U+201A,U+201C,U+201D,U+201E,U+2039,U+203A,U+2026,U+2022;
 }
 
-@font-face{
+@font-face {
   font-family: 'Fira Sans';
   src: local('Fira Sans Bold'),
-       url('theme/FiraSans-Bold.woff2') format('woff');
+       url('/theme/FiraSans-Bold.woff2') format('woff');
   font-weight: 700;
   font-style: normal;
   unicode-range: U+0020-007F,U+00A0-00FF,U+20BC,U+2010,U+2013,U+2014,U+2018,U+2019,U+201A,U+201C,U+201D,U+201E,U+2039,U+203A,U+2026,U+2022;
 }
 
-@font-face{
+@font-face {
   font-family: 'Fira Sans';
   src: local('Fira Sans Bold Italic'),
-       url('theme/FiraSans-BoldItalic.woff2') format('woff');
+       url('/theme/FiraSans-BoldItalic.woff2') format('woff');
   font-weight: 700;
   font-style: italic;
   unicode-range: U+0020-007F,U+00A0-00FF,U+20BC,U+2010,U+2013,U+2014,U+2018,U+2019,U+201A,U+201C,U+201D,U+201E,U+2039,U+203A,U+2026,U+2022;
@@ -75,26 +75,31 @@ body {
   margin: 0 auto;
   padding-top: 40px;
   padding-bottom: 40px;
-  
-  img, video, figure {
-    display: block;
-    margin: 0 auto;
-    max-width: 90%;
-  }
-  
-  ul {
-    margin-left: 1rem;
-    padding-left: 1rem;
-  }
-
-  a {
-    color: var(--textcolor);
-    text-decoration: underline;
-  }
 
   @media screen and (max-width: 480px) {
     width: 90%;
   }
+
+  @media print {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+img, video, figure {
+  display: block;
+  margin: 0 auto;
+  max-width: 90%;
+}
+
+ul {
+  margin-left: 1rem;
+  padding-left: 1rem;
+}
+
+a {
+  color: var(--textcolor);
+  text-decoration: underline;
 }
 
 header {
@@ -102,10 +107,38 @@ header {
   background-color: var(--backgroundcolor);
   top: 0;
   padding-bottom : 5px;
-  border-bottom: solid 1px var(--dark-green);
   overflow: hidden;
   a {
     color: var(--lighttextcolor);
+  }
+}
+
+header.site_header {
+  border-bottom: solid 1px var(--dark-green);
+  margin-bottom : 5px;
+}
+
+hr {
+  color: var(--dark-green);
+  background: var(--dark-green);
+  height: 1px;
+  font-size: 0;
+  border: 0;
+}
+
+header.post {
+  a {
+    font-size: 1.6em;
+    line-height: 1.4em;
+    font-weight: bold;
+    color: var(--textcolor);
+    text-decoration: none;
+    display: block;
+  }
+
+  time {
+    color: var(--mid-green);
+    text-align: right;
   }
 }
 
@@ -124,6 +157,9 @@ header {
   a {
     color: var(--textcolor);
     text-decoration: none;
+  }
+  svg {
+    width: 100%;
   }
 }
 
@@ -150,20 +186,9 @@ dl.archives {
   }
 }
 
-header.post {
-  border-bottom: none;
-  a {
-    font-size: 1.6em;
-    line-height: 1.4em;
-    font-weight: bold;
-    color: var(--textcolor);
-    text-decoration: none;
-    display: block;
-  }
-
-  time {
-    color: var(--mid-green);
-    text-align: right;
+@media print {
+  header.site_header {
+    display: none;
   }
 }
 
@@ -211,6 +236,7 @@ h6 {
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
+  margin-bottom: 0px;
 }
 
 pre {
@@ -251,7 +277,8 @@ button {
   border-color: var(--mid-green);
 }
 
-img.srko {
-  border-radius: 5%;
-  image-rendering: pixelated;
+@media print {
+  p:has(> img) {
+    break-inside: avoid;
+  }
 }

@@ -8,7 +8,7 @@ SITENAME = 'Joe Dillon'
 SITEURL = 'https://outurnate.com'
 RELATIVE_URLS = True
 
-PLUGINS = ['minify', 'webassets']
+PLUGINS = ['minify', 'webassets', 'sitemap']
 
 PATH = 'content'
 PAGE_PATHS = ['pages']
@@ -30,7 +30,7 @@ TIMEZONE = 'America/Toronto'
 DEFAULT_LANG = 'en'
 
 USE_FOLDER_AS_CATEGORY = True
-DELETE_OUTPUT_DIRECTORY = False
+DELETE_OUTPUT_DIRECTORY = True
 
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
 FEED_ALL_RSS = 'feeds/all.xml'
@@ -46,9 +46,6 @@ AUTHOR_SAVE_AS = ''
 DEFAULT_PAGINATION = False
 
 THEME = 'outurnate'
-
-TYPOGRIFY = True
-TYPOGRIFY_IGNORE_TAGS = ["pre", "code", "svg", "title"]
 
 MARKDOWN = {
   'extension_configs': {

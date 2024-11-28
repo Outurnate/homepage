@@ -10,3 +10,9 @@
 code {
   font-family: 'Fira Code';
 }
+
+@media print {
+  div.highlight {
+    break-inside: avoid;
+  }
+}

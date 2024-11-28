@@ -70,26 +70,26 @@ class D2BlockProcessor(BlockProcessor):
     RE_FENCE_END = r'\n *!{3,}\s*$'
 
     fonts = {
-        "regular": "outurnate/static/fonts/overpass-regular.ttf",
-        "italic": "outurnate/static/fonts/overpass-italic.ttf",
-        "bold": "outurnate/static/fonts/overpass-bold.ttf",
-        "semibold": "outurnate/static/fonts/overpass-semibold.ttf"
+        "regular": "d2/FiraSans-Regular.ttf",
+        "italic": "d2/FiraSans-Italic.ttf",
+        "bold": "d2/FiraSans-Bold.ttf",
+        "semibold": "d2/FiraSans-SemiBold.ttf"
     }
 
     def css_fix_rule(self, rule):
         for property in rule.style:
             if property.name == "font-family":
                 if "regular" in property.value.lower():
-                    property.value = "overpass"
+                    property.value = "Fira Sans"
                     rule.style["font-style"] = "normal"
                 if "italic" in property.value.lower():
-                    property.value = "overpass"
+                    property.value = "Fira Sans"
                     rule.style["font-style"] = "italic"
                 if "bold" in property.value.lower():
-                    property.value = "overpass"
+                    property.value = "Fira Sans"
                     rule.style["font-weight"] = "bold"
                 if "semibold" in property.value.lower():
-                    property.value = "overpass"
+                    property.value = "Fira Sans"
                     rule.style["font-weight"] = "600"
         return rule
 

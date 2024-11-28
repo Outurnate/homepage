@@ -1,8 +1,21 @@
 {% extends "base.html" %}
 {% block content_title %}{% endblock %}
 {% block content %}
-<section>
-  <p>I'm a hobbyist programmer who makes neat things.  Sometimes I do cybersecurity too.</p>
-  <p>I tend to end up writing more code than words about code, but I'm trying to change that.</p>
-</section>
+  {% for article in articles_page.object_list %}
+    <header class="post">
+      <a href="{{ SITEURL }}/{{ article.url }}" id="page-title">{{ article.title }}</a>
+      <time datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time>
+    </header>
+    <article>
+      {% if loop.first and not articles_page.has_previous() %}
+        {{ article.content }}
+      {% else %}
+        {{ article.summary }}
+        <p>
+          <a href="{{ SITEURL }}/{{ article.url }}">Read More</a>
+        </p>
+      {% endif %}
+    </article>
+    <hr />
+  {% endfor %}
 {% endblock content %}
