@@ -94,7 +94,7 @@ class D2BlockProcessor(BlockProcessor):
         return rule
 
     def d2_render(self, source):
-        p = Popen(["d2",
+        p = Popen(["d2/d2",
                    "--theme=1",
                    "--dark-theme=1",
                    f"--font-regular={self.fonts['regular']}",
