@@ -2,6 +2,7 @@ pelican[markdown]
 pelican-webassets
 pelican-minify
 pelican-sitemap
+pelican-seo
 cssmin
 libsass
 closure

@@ -1,8 +1,7 @@
 @font-face {
   font-family: 'Fira Sans';
-  src: local('Fira Sans Regular'),
-       url('/theme/FiraSans-Regular.woff2') format('woff');
-  font-weight: 400;
+  src: url('/theme/Firava.woff2') format('woff');
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
   unicode-range: U+0020-007F,U+00A0-00FF,U+20BC,U+2010,U+2013,U+2014,U+2018,U+2019,U+201A,U+201C,U+201D,U+201E,U+2039,U+203A,U+2026,U+2022;
@@ -10,49 +9,8 @@
 
 @font-face {
   font-family: 'Fira Sans';
-  src: local('Fira Sans Regular Italic'),
-       url('/theme/FiraSans-Italic.woff2') format('woff');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-  unicode-range: U+0020-007F,U+00A0-00FF,U+20BC,U+2010,U+2013,U+2014,U+2018,U+2019,U+201A,U+201C,U+201D,U+201E,U+2039,U+203A,U+2026,U+2022;
-}
-
-@font-face {
-  font-family: 'Fira Sans';
-  src: local('Fira Sans SemiBold'),
-       url('/theme/FiraSans-SemiBold.woff2') format('woff');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0020-007F,U+00A0-00FF,U+20BC,U+2010,U+2013,U+2014,U+2018,U+2019,U+201A,U+201C,U+201D,U+201E,U+2039,U+203A,U+2026,U+2022;
-}
-
-@font-face {
-  font-family: 'Fira Sans';
-  src: local('Fira Sans SemiBold Italic'),
-       url('/theme/FiraSans-SemiBoldItalic.woff2') format('woff');
-  font-weight: 600;
-  font-style: italic;
-  font-display: swap;
-  unicode-range: U+0020-007F,U+00A0-00FF,U+20BC,U+2010,U+2013,U+2014,U+2018,U+2019,U+201A,U+201C,U+201D,U+201E,U+2039,U+203A,U+2026,U+2022;
-}
-
-@font-face {
-  font-family: 'Fira Sans';
-  src: local('Fira Sans Bold'),
-       url('/theme/FiraSans-Bold.woff2') format('woff');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0020-007F,U+00A0-00FF,U+20BC,U+2010,U+2013,U+2014,U+2018,U+2019,U+201A,U+201C,U+201D,U+201E,U+2039,U+203A,U+2026,U+2022;
-}
-
-@font-face {
-  font-family: 'Fira Sans';
-  src: local('Fira Sans Bold Italic'),
-       url('/theme/FiraSans-BoldItalic.woff2') format('woff');
-  font-weight: 700;
+  src: url('/theme/FiravaItalic.woff2') format('woff');
+  font-weight: 100 900;
   font-style: italic;
   font-display: swap;
   unicode-range: U+0020-007F,U+00A0-00FF,U+20BC,U+2010,U+2013,U+2014,U+2018,U+2019,U+201A,U+201C,U+201D,U+201E,U+2039,U+203A,U+2026,U+2022;
@@ -134,7 +92,7 @@ hr {
 
 header.post {
   a {
-    font-size: 1.6em;
+    font-size: 2.2em;
     line-height: 1.4em;
     font-weight: bold;
     color: var(--textcolor);
@@ -146,14 +104,6 @@ header.post {
     color: var(--mid-green);
     text-align: right;
   }
-}
-
-.button_no_decoration {
-  color: var(--dark-green);
-  border: none;
-  outline: none;
-  background: transparent;
-  vertical-align: middle;
 }
 
 .site_title {
@@ -192,12 +142,6 @@ dl.archives {
   }
 }
 
-@media print {
-  header.site_header {
-    display: none;
-  }
-}
-
 footer {
   color: var(--lighttextcolor);
   margin-top: 50px;
@@ -217,11 +161,11 @@ footer {
 }
 
 h1 {
-  font-size: 2.2rem;
+  font-size: 1.7rem;
 }
 
 h2 {
-  font-size: 2.0rem;
+  font-size: 1.6rem;
 }
 
 h3 {
@@ -229,15 +173,15 @@ h3 {
 }
 
 h4 {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
 }
 
 h5 {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
 }
 
 h6 {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -273,18 +217,4 @@ table th, td {
 
 table td {
   padding: 10px;
-}
-
-button {
-  color: var(--backgroundcolor);
-  background-color: var(--mid-green);
-  border: solid;
-  border-radius: 3px;
-  border-color: var(--mid-green);
-}
-
-@media print {
-  p:has(> img) {
-    break-inside: avoid;
-  }
 }

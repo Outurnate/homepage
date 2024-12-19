@@ -140,3 +140,5 @@ In an effort to better understand how Philips approaches disclosing vulnerabilit
 # Closing thoughts
 
 Authentication is hard to get right.  Fortunately, most of the time, developers don't need to "roll their own" code.  Unfortunately, when developers do decide to create their own authentication implementations, they rarely get it right the first time.  Philips' ISCV and its multitude of authentication vulnerabilities is a testament to this.
+
+[Exploit code]({attach}philips-iscv-exploit.py) is available for download.

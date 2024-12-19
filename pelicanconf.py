@@ -5,10 +5,11 @@ import d2extension
 
 AUTHOR = 'Joe Dillon'
 SITENAME = 'Joe Dillon'
+SITESUBTITLE = 'Personal projects, research, and other things I find worth sharing'
 SITEURL = 'https://outurnate.com'
 RELATIVE_URLS = True
 
-PLUGINS = ['minify', 'webassets', 'sitemap']
+PLUGINS = ['minify', 'webassets', 'sitemap', 'seo']
 
 PATH = 'content'
 PAGE_PATHS = ['pages']
@@ -17,8 +18,7 @@ ARTICLE_PATHS = ['articles']
 IGNORE_FILES = ['.#*', '*.scss']
 EXTRA_PATH_METADATA = {
     "static/favicon.ico": {"path": "favicon.ico"},
-    "static/favicon.svg": {"path": "favicon.svg"},
-    "static/robots.txt": {"path": "robots.txt"}
+    "static/favicon.svg": {"path": "favicon.svg"}
 }
 
 TIMEZONE = 'America/Toronto'
@@ -54,3 +54,8 @@ MARKDOWN = {
   },
   'output_format': 'html5',
 }
+
+SEO_REPORT = True
+SEO_ENHANCER = True
+SEO_ENHANCER_OPEN_GRAPH = True
+SEO_ENHANCER_TWITTER_CARDS = False
