@@ -16,13 +16,9 @@ STATIC_PATHS = ['pages', 'static']
 ARTICLE_PATHS = ['articles']
 IGNORE_FILES = ['.#*', '*.scss']
 EXTRA_PATH_METADATA = {
-    "static/apple-touch-icon.png": {"path": "apple-touch-icon.png"},
-    "static/favicon-64x.png": {"path": "favicon-64x.png"},
     "static/favicon.ico": {"path": "favicon.ico"},
     "static/favicon.svg": {"path": "favicon.svg"},
-    "static/site.webmanifest": {"path": "site.webmanifest"},
-    "static/web-app-manifest-192x192.png": {"path": "web-app-manifest-192x192.png"},
-    "static/web-app-manifest-512x512.png": {"path": "web-app-manifest-512x512.png"}
+    "static/robots.txt": {"path": "robots.txt"}
 }
 
 TIMEZONE = 'America/Toronto'

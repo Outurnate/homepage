@@ -4,6 +4,7 @@
        url('/theme/FiraSans-Regular.woff2') format('woff');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
   unicode-range: U+0020-007F,U+00A0-00FF,U+20BC,U+2010,U+2013,U+2014,U+2018,U+2019,U+201A,U+201C,U+201D,U+201E,U+2039,U+203A,U+2026,U+2022;
 }
 
@@ -13,6 +14,7 @@
        url('/theme/FiraSans-Italic.woff2') format('woff');
   font-weight: 400;
   font-style: italic;
+  font-display: swap;
   unicode-range: U+0020-007F,U+00A0-00FF,U+20BC,U+2010,U+2013,U+2014,U+2018,U+2019,U+201A,U+201C,U+201D,U+201E,U+2039,U+203A,U+2026,U+2022;
 }
 
@@ -22,6 +24,7 @@
        url('/theme/FiraSans-SemiBold.woff2') format('woff');
   font-weight: 600;
   font-style: normal;
+  font-display: swap;
   unicode-range: U+0020-007F,U+00A0-00FF,U+20BC,U+2010,U+2013,U+2014,U+2018,U+2019,U+201A,U+201C,U+201D,U+201E,U+2039,U+203A,U+2026,U+2022;
 }
 
@@ -31,6 +34,7 @@
        url('/theme/FiraSans-SemiBoldItalic.woff2') format('woff');
   font-weight: 600;
   font-style: italic;
+  font-display: swap;
   unicode-range: U+0020-007F,U+00A0-00FF,U+20BC,U+2010,U+2013,U+2014,U+2018,U+2019,U+201A,U+201C,U+201D,U+201E,U+2039,U+203A,U+2026,U+2022;
 }
 
@@ -40,6 +44,7 @@
        url('/theme/FiraSans-Bold.woff2') format('woff');
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
   unicode-range: U+0020-007F,U+00A0-00FF,U+20BC,U+2010,U+2013,U+2014,U+2018,U+2019,U+201A,U+201C,U+201D,U+201E,U+2039,U+203A,U+2026,U+2022;
 }
 
@@ -49,6 +54,7 @@
        url('/theme/FiraSans-BoldItalic.woff2') format('woff');
   font-weight: 700;
   font-style: italic;
+  font-display: swap;
   unicode-range: U+0020-007F,U+00A0-00FF,U+20BC,U+2010,U+2013,U+2014,U+2018,U+2019,U+201A,U+201C,U+201D,U+201E,U+2039,U+203A,U+2026,U+2022;
 }
 
