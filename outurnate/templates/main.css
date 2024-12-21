@@ -25,6 +25,7 @@
   --backgroundcolor: #000000;
   --textcolor: #feffff;
   --lighttextcolor: #eeeeee;
+  --box-fill: #272822;
 }
 
 body {
@@ -42,11 +43,6 @@ body {
 
   @media screen and (max-width: 480px) {
     width: 90%;
-  }
-
-  @media print {
-    width: 100%;
-    max-width: 100%;
   }
 }
 
@@ -68,7 +64,6 @@ a {
 
 header {
   color: var(--lighttextcolor);
-  background-color: var(--backgroundcolor);
   top: 0;
   padding-bottom : 5px;
   overflow: hidden;
@@ -190,7 +185,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 pre {
-  border: 1px solid #AAA;
+  border: 1px solid var(--mid-green);
   overflow-x: auto;
   overflow-y: hidden;
   padding: 10px;
@@ -201,20 +196,4 @@ blockquote {
   border-left: 5px solid var(--mid-green);
   padding: 0.5rem;
   margin: 1rem;
-}
-
-table {
-  max-width: 90%;
-}
-
-table th {
-  padding: 10px;
-}
-
-table th, td {
-  border: solid 1px var(--light-green);
-}
-
-table td {
-  padding: 10px;
 }

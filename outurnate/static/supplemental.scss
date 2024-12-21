@@ -1,0 +1,56 @@
+@import 'code';
+@import 'print';
+
+.button_no_decoration {
+  color: var(--dark-green);
+  border: none;
+  outline: none;
+  background: transparent;
+  vertical-align: middle;
+}
+
+button {
+  color: var(--backgroundcolor);
+  background-color: var(--mid-green);
+  border: solid;
+  border-radius: 3px;
+  border-color: var(--mid-green);
+}
+
+sup {
+  a {
+    vertical-align: super;
+    font-size: smaller;
+    margin-left: 0.1rem;
+    margin-right: 0.1rem;
+  }
+  line-height: 0;
+}
+
+dt {
+  font-weight: bold;
+}
+
+table {
+  max-width: 90%;
+  margin: 0 auto;
+  border-collapse: collapse;
+
+  th {
+    padding: 10px;
+  }
+
+  th:empty {
+    border: none;
+    background: none;
+  }
+
+  th, td {
+    border: solid 1px var(--mid-green);
+    background: var(--box-fill);
+  }
+
+  td {
+    padding: 10px;
+  }
+}

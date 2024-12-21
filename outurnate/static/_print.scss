@@ -1,0 +1,18 @@
+@media print {
+  div.highlight {
+    break-inside: avoid;
+  }
+
+  header.site_header {
+    display: none;
+  }
+  
+  p:has(> img) {
+    break-inside: avoid;
+  }
+
+  body {
+    width: 100%;
+    max-width: 100%;
+  }
+}
