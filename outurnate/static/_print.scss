@@ -12,7 +12,19 @@
   }
 
   body {
-    width: 100%;
-    max-width: 100%;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
+
+  code {
+    word-wrap: anywhere;
+    white-space: pre-wrap;
+  }
+}
+
+@page {
+  size: auto;
+  margin: 5mm;
 }
