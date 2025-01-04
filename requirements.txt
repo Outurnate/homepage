@@ -7,3 +7,4 @@ cssmin
 libsass
 closure
 cssutils
+py_asciimath

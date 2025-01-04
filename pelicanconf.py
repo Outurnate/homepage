@@ -2,6 +2,7 @@ import sys
 sys.path.append('.')
 
 import d2extension
+import asciimathextension
 
 AUTHOR = 'Joe Dillon'
 SITENAME = 'Joe Dillon'
@@ -46,6 +47,7 @@ THEME = 'outurnate'
 MARKDOWN = {
   'extension_configs': {
     'd2extension': {},
+    'asciimathextension': {},
     'markdown.extensions.codehilite': {
       'css_class': 'highlight'
     },

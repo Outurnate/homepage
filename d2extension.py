@@ -66,7 +66,7 @@ style: {
 
 
 class D2BlockProcessor(BlockProcessor):
-    RE_FENCE_START = r'^ *!{3,} *\n'
+    RE_FENCE_START = r'^ *!{3,}d2 *\n'
     RE_FENCE_END = r'\n *!{3,}\s*$'
 
     fonts = {
