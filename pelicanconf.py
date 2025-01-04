@@ -42,7 +42,7 @@ AUTHOR_SAVE_AS = ''
 
 DEFAULT_PAGINATION = False
 
-THEME = 'outurnate'
+THEME = 'theme'
 
 MARKDOWN = {
   'extension_configs': {
