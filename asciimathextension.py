@@ -51,7 +51,7 @@ class ASCIIMathBlockProcessor(BlockProcessor):
 class ASCIIMathExtension(Extension):
     def extendMarkdown(self, md):
         processor = ASCIIMathBlockProcessor(md, md.parser)
-        md.parser.blockprocessors.register(processor, 'box', 175)
+        md.parser.blockprocessors.register(processor, 'asciimath', 175)
 
 
 def makeExtension(**kwargs):

@@ -155,7 +155,7 @@ class D2BlockProcessor(BlockProcessor):
 class D2Extension(Extension):
     def extendMarkdown(self, md):
         processor = D2BlockProcessor(md, md.parser)
-        md.parser.blockprocessors.register(processor, 'box', 175)
+        md.parser.blockprocessors.register(processor, 'd2', 175)
 
 
 def makeExtension(**kwargs):
