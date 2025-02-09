@@ -47,6 +47,7 @@ THEME = 'theme'
 MARKDOWN = {
   'extension_configs': {
     'd2extension': {},
+    'markdown_include.include': {},
     'asciimathextension': {},
     'markdown.extensions.codehilite': {
       'css_class': 'highlight'

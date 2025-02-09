@@ -8,3 +8,4 @@ libsass
 closure
 cssutils
 py_asciimath
+markdown-include
