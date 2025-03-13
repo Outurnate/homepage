@@ -17,10 +17,8 @@
 }
 
 :root {
-  --light-green:#389844;
-  --dark-green:#00420f;
-  --mid-green:#6b946c;
-  --off-black:#0c200d;
+  --highlight-fill: #389844;
+  --bordercolor: #6b946c;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -28,6 +26,7 @@
     --backgroundcolor: #000000;
 
     --box-fill: #272822;
+    --box-fill-title: #161711;
     --textcolor: #feffff;
     --lighttextcolor: #eeeeee;
 
@@ -38,6 +37,10 @@
     --code-color4: #ff4689;
     --code-color5: #a6e22e;
     --code-color6: #e6db74;
+
+    /* unused for now, can be used to match diagrams */
+    --diagram-color-a: #98E585;
+    --diagram-color-b: #0c200d;
   }
 }
 
@@ -46,6 +49,7 @@
     --backgroundcolor: #DDDDDD;
 
     --box-fill: #f8f8f8;
+    --box-fill-title: #e7e7e7;
     --textcolor: #000000;
     --lighttextcolor: #777777;
 
@@ -56,6 +60,10 @@
     --code-color4: #A00000;
     --code-color5: #0000FF;
     --code-color6: #BA2121;
+
+    /* unused for now, can be used to match diagrams */
+    --diagram-color-a: #0c200d;
+    --diagram-color-b: #98E585;
   }
 }
 
@@ -104,13 +112,13 @@ header {
 }
 
 header.site_header {
-  border-bottom: solid 1px var(--dark-green);
+  border-bottom: solid 1px var(--bordercolor);
   margin-bottom : 5px;
 }
 
 hr {
-  color: var(--dark-green);
-  background: var(--dark-green);
+  color: var(--bordercolor);
+  background: var(--bordercolor);
   height: 1px;
   font-size: 0;
   border: 0;
@@ -127,7 +135,7 @@ header.post {
   }
 
   time {
-    color: var(--mid-green);
+    color: var(--bordercolor);
     text-align: right;
   }
 }
@@ -146,19 +154,28 @@ header.post {
 }
 
 nav {
-  text-align: right;
+  text-align: left;
   a {
     text-decoration: none;
+  }
+  svg {
+    line-height: 1;
+    height: 1em;
+    width: 1em;
+    padding-left: 5px;
+  }
+  span.right {
+    float: right;
   }
 }
 
 dl.archives {
   dt {
-    color: var(--mid-green);
+    color: var(--bordercolor);
   }
 
   dd {
-    color: var(--mid-green);
+    color: var(--bordercolor);
     font-size: 1.3rem;
     margin-left: 0;
 
@@ -186,6 +203,7 @@ footer {
   }
 }
 
+/* heading text */
 h1 {
   font-size: 1.7rem;
 }
@@ -207,16 +225,26 @@ h4, h5, h6 {
   display: none;
 }
 
+/* stuff in boxes */
+pre, .admonition {
+  background: var(--box-fill);
+  color: var(--textcolor);
+  border: 1px solid var(--bordercolor);
+}
+
 pre {
-  border: 1px solid var(--mid-green);
   overflow-x: auto;
   overflow-y: hidden;
   padding: 10px;
   font-size: 1em;
 }
 
-blockquote {
-  border-left: 5px solid var(--mid-green);
-  padding: 0.5rem;
-  margin: 1rem;
+.admonition {
+  padding: 5px 10px;
+}
+
+.admonition p.admonition-title {
+  background: var(--box-fill-title);
+  margin: -5px -10px 0;
+  padding: 5px 10px;
 }

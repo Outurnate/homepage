@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="15" version="1.0">
   <defs>
-    <clipPath id="a" clipPathUnits="userSpaceOnUse">
+    <clipPath id="b" clipPathUnits="userSpaceOnUse">
       <path d="M171.998 239.12h20.614v12.484h-20.614z" style="fill:#000;fill-opacity:1;stroke:none;stroke-width:.92243534;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"/>
     </clipPath>
   </defs>
   <path d="M170.5 237.862h80v15h-80z" style="fill:#fff;fill-opacity:1;stroke:#000;stroke-width:1.04161763;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" transform="matrix(.9875 0 0 .93335 -167.875 -221.476)"/>
   <path d="M172 239.362h77v12h-77z" style="fill:#000;fill-opacity:1;stroke:none;stroke-width:.92243534;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" transform="matrix(.9875 0 0 .93335 -167.875 -221.476)"/>
   <path d="M172 239.375v12h20.335c1.308-1.75 2.192-3.784 2.192-6 0-2.2-.868-4.257-2.161-6z" style="fill:#abb1aa;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:.46913578" transform="matrix(.9875 0 0 .93335 -167.875 -221.476)"/>
-  <g clip-path="url(#a)" transform="matrix(.94924 0 0 .89719 -161.127 -212.602)">
+  <g clip-path="url(#b)" transform="matrix(.94924 0 0 .89719 -161.127 -212.602)">
     <path d="M190.064 245.362a7.047 7.047 0 0 1-14.094.009v-.009a7.047 7.047 0 1 1 14.094-.008z" style="opacity:1;fill:#fff"/>
     <path d="M188.746 239.622q2.344 2.345 2.344 5.74t-2.304 5.68q-2.445 2.405-5.779 2.405-3.294 0-5.678-2.385t-2.385-5.7 2.385-5.74q2.324-2.344 5.678-2.344 3.395 0 5.739 2.344m-10.365 1.052q-1.982 2-1.982 4.69t1.962 4.65q1.96 1.962 4.67 1.961t4.71-1.98q1.901-1.841 1.901-4.63 0-2.77-1.931-4.701-1.93-1.931-4.68-1.931t-4.65 1.94m3.477 3.902q-.303-.66-.907-.66-1.07 0-1.07 1.438 0 1.44 1.07 1.439.705 0 1.008-.702l.987.526q-.706 1.255-2.118 1.255-1.09 0-1.745-.668-.656-.668-.656-1.842 0-1.154.676-1.831.675-.68 1.684-.679 1.494 0 2.14 1.176zm4.646 0q-.303-.66-.889-.66-1.09 0-1.09 1.438 0 1.44 1.09 1.439.706 0 .99-.702l1.01.526q-.705 1.255-2.116 1.255-1.088 0-1.742-.668t-.654-1.842q0-1.154.664-1.831.665-.68 1.692-.679 1.491 0 2.135 1.176z" style="opacity:1"/>
   </g>

@@ -22,18 +22,18 @@ vars: {
       N6: "#323232"
       N7: "#1E1E1E"
 
-      B1: "#98E5A5"
-      B2: "#6B946C"
-      B3: "#389844"
-      B4: "#00420F"
-      B5: "#0C200D"
-      B6: "#0C200D"
+      B1: "#98E585" # --diagram-color-a
+      B2: "#6B946C" # --bordercolor
+      B3: "#389844" # --highlight-fill
+      B4: "#0C200D" # --diagram-color-b
+      B5: "#0C200D" # --diagram-color-b
+      B6: "#0C200D" # --diagram-color-b
 
-      AA4: "#389844"
-      AA5: "#98E5A5"
+      AA4: "#389844" # --highlight-fill
+      AA5: "#389844" # --highlight-fill
 
-      AB4: "#6B946C"
-      AB5: "#98E5A5"
+      AB4: "#6B946C" # --bordercolor
+      AB5: "#389844" # --highlight-fill
     }
     theme-overrides: {
       N1: "#0F0F25"
@@ -44,18 +44,18 @@ vars: {
       N6: "#F1F1F1"
       N7: "#FFFFFF"
 
-      B1: "#0C200D"
-      B2: "#00420F"
-      B3: "#389844"
-      B4: "#6B946C"
-      B5: "#98E5A5"
-      B6: "#98E5A5"
+      B1: "#0C200D" # --diagram-color-a
+      B2: "#6B946C" # --bordercolor
+      B3: "#389844" # --highlight-fill
+      B4: "#98E585" # --diagram-color-b
+      B5: "#98E585" # --diagram-color-b
+      B6: "#98E585" # --diagram-color-b
 
-      AA4: "#389844"
-      AA5: "#98E5A5"
+      AA4: "#389844" # --highlight-fill
+      AA5: "#389844" # --highlight-fill
 
-      AB4: "#6B946C"
-      AB5: "#98E5A5"
+      AB4: "#6B946C" # --bordercolor
+      AB5: "#389844" # --highlight-fill
     }
   }
 }
