@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Joe Dillon{% endblock %}
+{% block head %}
+    <link href="{{ config.get_site_url() }}" rel="canonical" />
+{% endblock %}
+{% block header %}
+    <h1>Posts</h1>
+{% endblock %}
+{% block content %}
+    <nav class="article_list">
+        <ul>
+            {% for article in sitemap.get_article_entries(config) %}
+                <li>
+                    <a href="{{ article.relative_url }}">
+                        <img src="{{ article.listing_url }}" />
+                        <h1>{{ article.title }}</h1>
+                        Posted <time datetime="{{ self::iso_date(article.date) }}">{{ self::human_date(article.date) }}</time> in {{ article.category }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
+{% endblock %}

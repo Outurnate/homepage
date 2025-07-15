@@ -1,0 +1,116 @@
+/* code */
+@font-face {
+    font-family: "Fira Code";
+    src: url("FiraCode-VF.woff2") format("woff2-variations");
+    font-weight: 300 700;
+    font-style: normal;
+}
+
+code {
+    font-family: "Fira Code";
+}
+
+.source {
+    .keyword.operator,
+    .entity.name {
+        font-weight: bold;
+        color: var(--diagram-color-a);
+    }
+
+    .keyword.control,
+    .storage.type {
+        color: var(--highlight-fill);
+    }
+
+    .string {
+        color: var(--turbo-beige);
+    }
+
+    .constant {
+        color: var(--code-color3);
+    }
+
+    .comment {
+        background-color: var(--diagram-color-a);
+        color: var(--diagram-color-b);
+    }
+}
+
+/* print */
+@media print {
+    div.highlight {
+        break-inside: avoid;
+    }
+
+    header.site_header {
+        display: none;
+    }
+
+    p:has(> img) {
+        break-inside: avoid;
+    }
+
+    body {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    code {
+        word-wrap: anywhere;
+        white-space: pre-wrap;
+    }
+}
+
+@page {
+    size: auto;
+    margin: 5mm;
+}
+
+/* math */
+math {
+    display: block;
+    math-style: normal;
+}
+
+/* misc */
+sup {
+    a {
+        vertical-align: super;
+        font-size: smaller;
+        margin-left: 0.1rem;
+        margin-right: 0.1rem;
+    }
+
+    line-height: 0;
+}
+
+dt {
+    font-weight: bold;
+}
+
+table {
+    max-width: 90%;
+    margin: 0 auto;
+    border-collapse: collapse;
+
+    th {
+        padding: 10px;
+    }
+
+    th:empty {
+        border: none;
+        background: none;
+    }
+
+    th,
+    td {
+        border: solid 1px var(--bordercolor);
+        background: var(--box-fill);
+    }
+
+    td {
+        padding: 10px;
+    }
+}

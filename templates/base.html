@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5, viewport-fit=cover" />
+    <meta name="description" content="Personal projects, research, and other things I find worth sharing" />
+    <title>{%~ block title %}{% endblock title ~%}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/assets/supplemental.css" />
+    <link rel="preload" href="/assets/Firava.woff2" as="font" type="font/woff2" />
+    <link rel="preload" href="/assets/FiravaItalic.woff2" as="font" type="font/woff2" />
+    <link href="{{ config.get_site_url() }}feeds/feed.xml" type="application/rss+xml" rel="alternate" title="Joe Dillon's Feed" />
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+    <style type="text/css">{% include "main.css" %}</style>
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "WebSite",
+        "url": "{{ config.get_site_url() }}"
+      }
+    </script>
+    {%~ block head %}{% endblock head ~%}
+  </head>
+  <body>
+    <header>
+      <div class="site_title">
+        <p><a href="/" aria-label="Go back to homepage for outurnate.com">{% include "banner.svg" %}</a></p>
+      </div>
+      <nav>
+        <a href="https://github.com/outurnate">{% include "github.svg" %}</a>
+        <a href="/feeds/feed.xml">{% include "rss.svg" %}</a>
+        <span class="right">
+          <a href="/archives.html">&gt;archives</a>
+          &nbsp;<a href="/web-things.html">&gt;web things</a>
+        </span>
+      </nav>
+      {%~ block header %}{% endblock header ~%}
+    </header>
+    {%~ block content %}{% endblock content ~%}
+    <footer>
+      <small>&copy; 2022-2025 Joe Dillon</small>
+      <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" aria-label="Read content license">{% include "cc.svg" %}</a>
+    </footer>
+  </body>
+</html>

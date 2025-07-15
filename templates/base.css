@@ -1,0 +1,130 @@
+@font-face {
+    font-family: "Fira Sans";
+    src: url("/assets/Firava.woff2") format("woff");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+    unicode-range:
+        U+0020-007F, U+00A0-00FF, U+20BC, U+2010, U+2013, U+2014, U+2018,
+        U+2019, U+201A, U+201C, U+201D, U+201E, U+2039, U+203A, U+2026, U+2022;
+}
+
+@font-face {
+    font-family: "Fira Sans";
+    src: url("/assets/FiravaItalic.woff2") format("woff");
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+    unicode-range:
+        U+0020-007F, U+00A0-00FF, U+20BC, U+2010, U+2013, U+2014, U+2018,
+        U+2019, U+201A, U+201C, U+201D, U+201E, U+2039, U+203A, U+2026, U+2022;
+}
+
+:root {
+    --highlight-fill: #389844;
+    --bordercolor: #6b946c;
+    --turbo-beige: #d5bca6;
+    color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --backgroundcolor: #000000;
+
+        --box-fill: #272822;
+        --box-fill-title: #161711;
+        --textcolor: #feffff;
+        --lighttextcolor: #eeeeee;
+
+        --code-hightlight: #49483e;
+        --code-color1: #ae81ff;
+        --code-color2: #959077;
+        --code-color3: #66d9ef;
+        --code-color4: #ff4689;
+        --code-color5: #a6e22e;
+        --code-color6: #e6db74;
+
+        --diagram-color-a: #98e585;
+        --diagram-color-b: #0c200d;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --backgroundcolor: #dddddd;
+
+        --box-fill: #f8f8f8;
+        --box-fill-title: #e7e7e7;
+        --textcolor: #000000;
+        --lighttextcolor: #777777;
+
+        --code-highlight: #ffffcc;
+        --code-color1: #666666;
+        --code-color2: #3d7b7b;
+        --code-color3: #008000;
+        --code-color4: #a00000;
+        --code-color5: #0000ff;
+        --code-color6: #ba2121;
+
+        /* unused for now, can be used to match diagrams */
+        --diagram-color-a: #0c200d;
+        --diagram-color-b: #98e585;
+    }
+}
+
+body {
+    line-height: 1.5;
+    color: var(--textcolor);
+    background-color: var(--backgroundcolor);
+    font-family: Fira Sans;
+    font-size: 1em;
+    margin: 0 auto;
+    padding-bottom: 40px;
+
+    @media screen and (max-width: 480px) {
+        width: 90%;
+    }
+}
+
+header {
+    nav {
+        border-bottom: solid 1px var(--bordercolor);
+        margin-bottom: 5px;
+        text-align: left;
+        a {
+            text-decoration: none;
+        }
+        svg {
+            line-height: 1;
+            height: 1em;
+            width: 1em;
+            padding-left: 5px;
+        }
+        span.right {
+            float: right;
+        }
+    }
+}
+
+a {
+    color: var(--textcolor);
+    text-decoration: underline;
+}
+
+footer {
+    color: var(--lighttextcolor);
+    margin-top: 50px;
+    padding-top: 0px;
+    a {
+        color: var(--lighttextcolor);
+    }
+    svg {
+        display: block;
+        margin: auto;
+    }
+    small {
+        display: block;
+        text-align: center;
+        font-size: 0.6rem;
+    }
+}

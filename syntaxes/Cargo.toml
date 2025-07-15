@@ -1,0 +1,7 @@
+[package]
+name = "syntaxes"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+syntect = { version = "5.2.0", default-features = false, features = ["dump-create", "regex-fancy", "default-syntaxes", "yaml-load"] }

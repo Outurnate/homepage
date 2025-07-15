@@ -1,0 +1,21 @@
+{% extends "simple.html" %}
+{% block title %}Markov Word Generator{% endblock %}
+{%~ block head %}
+    <script src="assets/generator.js"></script>
+    <script src="assets/markov.js"></script>
+{% endblock head ~%}
+{%~ block content %}
+<h1>Your word is:</h1>
+<div>
+  <span id="word" style="font-size: 48px;"></span>
+  <div id="loader">{% include "loading.svg" %}</div>
+</div>
+<p>Get a <a id="regen" href="#">new word</a></p>
+<label for="jsonfile">Wordlist:</label>
+<select id="jsonfile">
+    <option value="assets/google-10000-english-no-swears.json">Google word list</option>
+    <option value="assets/arineng-last-names.json">Last names</option>
+    <option value="assets/dominictarr-first-names.json">First names</option>
+</select>
+<p><a href="https://github.com/Outurnate/markov-word-generator">Source code</a></p>
+{% endblock content ~%}

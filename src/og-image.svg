@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="640" height="103" viewBox="0 0 640 103">
+  <defs>
+    <clipPath id="clipCircle">
+      <circle r="45" cx="45" cy="45" />
+    </clipPath>
+  </defs>
+  <rect width="650" height="3" x="-10" y="0" fill="#6b946c" />
+  <rect width="650" height="100" x="-10" y="3" fill="black" />
+  <image xlink:href="favicon.svg" height="90" width="90" clip-path="url(#clipCircle)" transform="translate(540, 13)" />
+  <text x="20" y="90" font-size="20px" font-weight="bold" font-family="Fira Sans" fill="white">outurnate.com</text>
+</svg>

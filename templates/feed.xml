@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="feed.xslt" ?>
+<rss version="2.0">
+    <channel>
+        <title>Joe Dillon's Feed</title>
+        <link>{{ config.get_site_url() }}</link>
+        <description
+        >Personal projects, research, and other things I find worth sharing</description>
+        {% for article in sitemap.get_article_entries(config) %}
+        <item>
+            <title>{{ article.title }}</title>
+            <link>{{ article.full_url }}</link>
+            <guid isPermaLink="true">{{ article.full_url }}</guid>
+            <pubDate>{{ self::iso_date(article.date) }}</pubDate>
+            <category>{{ article.category }}</category>
+        </item>
+        {% endfor %}
+    </channel>
+</rss>

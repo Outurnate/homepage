@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}{{ document.title }}{% endblock %}
+{% block head %}
+    <link href="{{ content_reference.get_full_url(config) }}" rel="canonical" />
+    <meta property="og:title" content="{{ document.title }}" />
+    {% match document.metadata %}
+        {% when Metadata::Article { date, modified, category } %}
+            <meta property="og:type" content="article" />
+            <meta property="article:published_time" content="{{ self::iso_date(date) }}" />
+            {% if let Some(modified) = modified %}
+                <meta property="article:modified_time" content="{{ self::iso_date(modified) }}" />
+            {% endif %}
+            <meta property="article:section" content="{{ category }}" />
+        {% endwhen %}
+        {% when Metadata::Page { description } %}
+            <meta property="og:type" content="website" />
+        {% endwhen %}
+    {% endmatch %}
+    <meta property="og:url" content="{{ content_reference.get_full_url(config) }}" />
+    <meta property="og:image" content="{{ opengraph_image_url }}" />
+    <script type="application/ld+json">
+        {% match document.metadata %}
+            {% when Metadata::Article { date, modified, category } %}
+                {
+                    "@context": "https://schema.org",
+                    "@type": "BlogPosting",
+                    "headline": "{{ document.title }}",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Joe Dillon"
+                    },
+                    "datePublished": "{{ self::iso_date(date) }}",
+                    {% if let Some(modified) = modified %}
+                        "dateModified": "{{ self::iso_date(modified) }}",
+                    {% endif %}
+                    "url": "{{ content_reference.get_full_url(config) }}",
+                    "inLanguage": "en-CA",
+                    "image": "{{ opengraph_image_url }}"
+                }
+            {% endwhen %}
+            {% when Metadata::Page { description } %}
+                {
+                    "@context": "http://schema.org",
+                    "@type": "WebPage",
+                    "name": "{{ document.title }}",
+                    "description": "{{ description }}",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Joe Dillon"
+                    }
+                }
+            {% endwhen %}
+        {% endmatch %}
+    </script>
+{% endblock %}
+{% block header %}
+    {% match document.metadata %}
+        {% when Metadata::Article { date, modified, category } %}
+            <h1><a href="{{ content_reference.get_full_url(config) }}" id="page-title">{{ document.title }}</a></h1>
+            <time datetime="{{ self::iso_date(date) }}">{{ self::human_date(date) }}</time>
+        {% endwhen %}
+        {% when Metadata::Page { description } %}
+        {% endwhen %}
+    {% endmatch %}
+{% endblock %}
+{% block content %}
+    {% match document.metadata %}
+        {% when Metadata::Article { date, modified, category } %}
+            <article>
+                {{ document.content | safe }}
+            </article>
+        {% endwhen %}
+        {% when Metadata::Page { description } %}
+            {{ document.content | safe }}
+        {% endwhen %}
+    {% endmatch %}
+{% endblock %}

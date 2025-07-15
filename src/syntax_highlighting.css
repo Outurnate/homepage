@@ -1,0 +1,29 @@
+.source {
+    font-size: 30px;
+    font-family: "Fira Code";
+    fill: #feffff;
+}
+
+.keyword.operator,
+.entity.name {
+    font-weight: bold;
+    fill: #98e585;
+}
+
+.keyword.control,
+.storage.type {
+    fill: #389844;
+}
+
+.string {
+    fill: #d5bca6;
+}
+
+.constant {
+    fill: #66d9ef;
+}
+
+.comment {
+    font-weight: bold;
+    fill: #98e585;
+}

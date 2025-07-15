@@ -1,0 +1,155 @@
+{% include "base.css" %}
+
+body {
+    padding-top: 40px;
+    width: 80%;
+    min-width: 200px;
+    max-width: 720px;
+}
+
+img,
+video,
+figure {
+    display: block;
+    margin: 0 auto;
+    max-width: 90%;
+}
+
+ul {
+    margin-left: 1rem;
+    padding-left: 1rem;
+}
+
+header {
+    color: var(--lighttextcolor);
+    top: 0;
+    padding-bottom: 5px;
+    overflow: hidden;
+    a {
+        color: var(--lighttextcolor);
+    }
+    h1 {
+        font-size: 2.2em;
+        line-height: 1.4em;
+        font-weight: bold;
+        display: block;
+        a {
+            color: var(--textcolor);
+            text-decoration: none;
+        }
+    }
+    time {
+        color: var(--bordercolor);
+        text-align: right;
+    }
+    .site_title {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.5rem;
+        svg {
+            width: 100%;
+        }
+    }
+}
+
+hr {
+    color: var(--bordercolor);
+    background: var(--bordercolor);
+    height: 1px;
+    font-size: 0;
+    border: 0;
+}
+
+dl.archives {
+    dt {
+        color: var(--bordercolor);
+    }
+
+    dd {
+        color: var(--bordercolor);
+        font-size: 1.3rem;
+        margin-left: 0;
+
+        a {
+            text-decoration: none;
+        }
+    }
+}
+
+/* heading text */
+h1 {
+    font-size: 1.7rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.2rem;
+}
+
+h1,
+h2,
+h3 {
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+
+h4,
+h5,
+h6 {
+    display: none;
+}
+
+/* stuff in boxes */
+pre,
+.markdown-alert {
+    background: var(--box-fill);
+    color: var(--textcolor);
+    border: 1px solid var(--bordercolor);
+}
+
+pre {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 10px;
+    font-size: 1em;
+}
+
+.markdown-alert {
+    padding: 5px 10px;
+}
+
+.markdown-alert p.markdown-alert-title {
+    background: var(--box-fill-title);
+    margin: -5px -10px 0;
+    padding: 5px 10px;
+}
+
+nav.article_list {
+    li {
+        display: flow-root;
+        margin-bottom: 5px;
+    }
+    ul {
+        list-style: none;
+        padding-left: 0;
+    }
+    a {
+        text-decoration: none;
+    }
+    time {
+        color: var(--bordercolor);
+        font-weight: bold;
+    }
+    h1 {
+        margin-top: 0;
+        font-size: 1.3rem;
+    }
+    img {
+        float: left;
+        max-width: 25%;
+        margin-right: 10px;
+    }
+}
