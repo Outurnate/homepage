@@ -5,8 +5,8 @@ build:
     du -h -d1 ./output/
 
 retool:
-    cargo build --release
-    cp ./target/release/site-generator ./bin/
+    cargo build --release --target=x86_64-unknown-linux-musl
+    cp ./target/x86_64-unknown-linux-musl/release/site-generator ./bin/
 
 watch:
     #!/usr/bin/env bash
