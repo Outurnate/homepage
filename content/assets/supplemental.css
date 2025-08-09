@@ -18,7 +18,8 @@ code {
     }
 
     .keyword.control,
-    .storage.type {
+    .storage.type,
+    .storage.modifier {
         color: var(--highlight-fill);
     }
 
@@ -42,8 +43,11 @@ code {
         break-inside: avoid;
     }
 
-    header.site_header {
-        display: none;
+    header {
+        div.site_title,
+        nav {
+            display: none;
+        }
     }
 
     p:has(> img) {

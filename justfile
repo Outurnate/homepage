@@ -5,11 +5,13 @@ build:
     du -h -d1 ./output/
 
 retool:
+    cd syntaxes && cargo run
     cargo build --release --target=x86_64-unknown-linux-musl
     cp ./target/x86_64-unknown-linux-musl/release/site-generator ./bin/
 
 watch:
     #!/usr/bin/env bash
+    {{ just_executable() }} build
     trap 'kill $BGPID; exit' INT
     python -m http.server -d ./output/ 8000 &
     BGPID=$!

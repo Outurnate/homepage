@@ -11,7 +11,8 @@
 }
 
 .keyword.control,
-.storage.type {
+.storage.type,
+.storage.modifier {
     fill: #389844;
 }
 
