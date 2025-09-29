@@ -1,0 +1,57 @@
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+
+Operational Technology Network: {
+  X-Ray: {
+    shape: "square";
+    width: 60;
+  }
+  CT: {
+    shape: "square";
+    width: 60;
+  }
+  MRI: {
+    shape: "square";
+    width: 60;
+  }
+  DICOM Router: {
+    shape: "queue";
+    width: 500;
+  }
+
+  X-Ray -> DICOM Router: {
+    source-arrowhead.label: "192.168.3.10";
+    label: "Unauthenticated DICOM";
+  }
+  MRI -> DICOM Router: {
+    source-arrowhead.label: "192.168.3.11";
+    label: "Authenticated DICOM";
+  }
+  CT -> DICOM Router: {
+    source-arrowhead.label: "192.168.3.12";
+    label: "Unauthenticated DICOM over TLS";
+  }
+}
+
+Operational Technology Network.DICOM Router -> Information Technology Network.PACS System: {
+  source-arrowhead.label: "192.168.3.50";
+  label: "Authenticated DICOM over TLS";
+}
+
+Information Technology Network: {
+  PACS System: {
+    shape: "cylinder";
+    width: 100;
+    height: 100;
+  }
+  PACS Client.shape: "person";
+
+  PACS System <- PACS Client: {
+    source-arrowhead.label: "10.0.0.10";
+    label: "Authenticated DICOM over TLS";
+    target-arrowhead.label: "10.0.0.150";
+  }
+}

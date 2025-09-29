@@ -107,7 +107,8 @@ h6 {
 
 /* stuff in boxes */
 pre,
-.markdown-alert {
+.markdown-alert,
+blockquote {
     background: var(--box-fill);
     color: var(--textcolor);
     border: 1px solid var(--bordercolor);
@@ -127,6 +128,11 @@ pre {
 .markdown-alert p.markdown-alert-title {
     background: var(--box-fill-title);
     margin: -5px -10px 0;
+    padding: 5px 10px;
+}
+
+blockquote {
+    margin: 0;
     padding: 5px 10px;
 }
 

@@ -3,7 +3,7 @@ use std::io::Cursor;
 use askama::Template;
 use chrono::{DateTime, Datelike};
 use chrono_tz::Tz;
-use color_eyre::eyre::Result;
+use color_eyre::eyre::{Context, Result};
 use image::{DynamicImage, ImageReader, Rgb, RgbImage, buffer::ConvertBuffer, imageops};
 use ntscrs::ntsc::{
     FbmNoiseSettings, NtscEffect, TrackingNoiseSettings, VHSEdgeWaveSettings, VHSSettings,
@@ -55,7 +55,8 @@ fn render_og_bg(
         Some(ListingImage::ImageUrl(image_url)) => {
             info!("selected {image_url:?} as opengraph image");
             let image_url = content_reference.resolve_relative_path(content_index, image_url);
-            let bytes = std::fs::read(&image_url)?;
+            let bytes = std::fs::read(&image_url)
+                .wrap_err(format!("Error opening {}", image_url.to_string_lossy()))?;
             let image = match image_url.extension().and_then(|ext| ext.to_str()) {
                 Some("svg") => DynamicImage::ImageRgba8(render_svg(
                     content_index.get_fontbook(),
